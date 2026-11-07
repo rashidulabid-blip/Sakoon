@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eff7f2">
+<meta name="description" content="Sakoon — অনুভূতির সময়ে কুরআনের সান্নিধ্য।">
+<title>Sakoon — কুরআনের সান্নিধ্যে</title>
+<style>
+:root{--bg:#f3f8f5;--panel:#fff;--ink:#183a31;--muted:#657a72;--line:#dce9e2;--accent:#27745f;--soft:#e1f1e8;--shadow:0 8px 28px #214b3810}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;line-height:1.55}
+body.dark{--bg:#101a17;--panel:#192722;--ink:#edf8f1;--muted:#aec2b8;--line:#30473d;--accent:#78c9a8;--soft:#203a30;--shadow:0 8px 28px #0003}
+button,input,textarea{font:inherit}button{cursor:pointer}header{background:radial-gradient(circle at 90% 10%,#c3e7d4,transparent 38%),linear-gradient(130deg,#e4f3e9,#f3f8f5);padding:27px 18px 24px;border-bottom:1px solid var(--line)}
+body.dark header{background:radial-gradient(circle at 90% 10%,#285343,transparent 38%),linear-gradient(130deg,#1b3329,#101a17)}
+.wrap{max-width:920px;margin:auto}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:var(--accent);color:white;display:grid;place-items:center;font-size:26px;box-shadow:var(--shadow)}h1{font-size:29px;margin:0;letter-spacing:-.4px}header p{margin:5px 0 0;color:var(--muted)}
+main{max-width:920px;margin:auto;padding:16px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 20px}.tool{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:12px;padding:10px 13px}.tool.active{background:var(--soft);border-color:var(--accent)}
+.intro{display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap}h2{font-size:20px;margin:8px 0 5px}.sub{color:var(--muted);margin:0 0 14px;font-size:14px}
+.search{width:100%;max-width:300px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);outline-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.emotion{border:1px solid #00000008;border-radius:16px;text-align:left;padding:14px 12px;min-height:78px;color:#183a31;box-shadow:0 3px 10px #00000008;transition:transform .12s,box-shadow .12s}.emotion:hover{transform:translateY(-2px);box-shadow:0 7px 18px #00000012}.emotion .emoji{font-size:21px;margin-right:5px}.emotion .bn{font-weight:700}.emotion small{display:block;margin:4px 0 0 31px;opacity:.75;font-size:12px}
+.card{display:none;margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}.card.show{display:block}.eyebrow{color:var(--muted);font-size:13px}.arabic{font-family:"Noto Naskh Arabic","Amiri",serif;font-size:29px;line-height:2;text-align:right;direction:rtl;margin:18px 0;padding:10px 0;border-bottom:1px solid var(--line)}.translation{font-size:18px;line-height:1.9}.ref{font-size:13px;color:var(--muted);margin-top:10px}.reflection{background:var(--soft);padding:13px 14px;border-radius:14px;margin-top:16px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.primary{background:var(--accent);color:white;border:0;border-radius:11px;padding:10px 13px}.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 13px}
+textarea{width:100%;min-height:88px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical;margin-top:8px}.section{display:none}.section.show{display:block}.fav-item{padding:12px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.fav-item button{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:10px;padding:8px 10px}.notice{font-size:12px;color:var(--muted);line-height:1.7;margin:24px 2px 8px}.empty{padding:22px 10px;text-align:center;color:var(--muted)}footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(min-width:620px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}main{padding:22px}.card{padding:24px}header{padding:32px 24px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand"><div class="logo">🌿</div><div><h1>Sakoon</h1><p>প্রতিটি অনুভূতিতে কুরআনের সান্নিধ্য</p></div></div></div></header>
+<main>
+<nav class="toolbar" aria-label="প্রধান মেনু">
+<button class="tool active" id="homeBtn">💚 অনুভূতি</button><button class="tool" id="favoritesBtn">⭐ পছন্দের আয়াত <span id="favCount"></span></button><button class="tool" id="themeBtn">🌙 থিম</button>
+</nav>
+<section id="homeSection" class="section show">
+<div class="intro"><div><h2>এই মুহূর্তে তুমি কেমন অনুভব করছ?</h2><p class="sub">একটি অনুভূতি বেছে নাও—তারপর পড়ো, ভাবো, দোয়া করো।</p></div><input id="search" class="search" type="search" placeholder="🔎 অনুভূতি খুঁজো…" aria-label="অনুভূতি খুঁজো"></div>
+<div id="emotionGrid" class="grid"></div>
+</section>
+<section id="verseCard" class="card" aria-live="polite">
+<div class="eyebrow" id="emotionLabel"></div><h2 id="verseHeading">তোমার জন্য একটি আয়াত</h2>
+<div id="arabicText" class="arabic" lang="ar" dir="rtl"></div><div id="translationText" class="translation"></div><div id="referenceText" class="ref"></div>
+<div id="reflectionText" class="reflection"></div>
+<div class="actions"><button class="primary" id="nextVerseBtn">🔄 আরেকটি আয়াত</button><button class="secondary" id="favoriteBtn">☆ পছন্দে রাখো</button><button class="secondary" id="shareBtn">📤 শেয়ার</button><button class="secondary" id="copyBtn">📋 কপি</button></div>
+<h3>📝 ব্যক্তিগত নোট</h3><p class="sub">নোট শুধু এই ব্রাউজার/ডিভাইসেই সংরক্ষিত থাকবে।</p><textarea id="noteInput" placeholder="এখানে নিজের ভাবনা লিখতে পারো…"></textarea><div class="actions"><button class="primary" id="saveNoteBtn">নোট সংরক্ষণ</button></div>
+</section>
+<section id="favoritesSection" class="card section"><h2>⭐ পছন্দের আয়াত</h2><div id="favoritesList"></div></section>
+<div class="notice">দ্রষ্টব্য: এখানে দেওয়া আয়াতের অংশ, বাংলা অর্থ ও ভাবনামূলক বার্তা ব্যক্তিগত স্মরণ ও অনুপ্রেরণার জন্য। প্রকাশ্যে শেয়ার বা শিক্ষামূলক ব্যবহারের আগে আরবি পাঠ, আয়াতের প্রেক্ষাপট ও অনুবাদ নির্ভরযোগ্য মুদ্রিত মুসহাফ/তাফসিরের সঙ্গে মিলিয়ে নাও। এটি তাফসির বা মানসিক স্বাস্থ্যসেবার বিকল্প নয়।</div>
+</main>
+<footer>Made with care · Sakoon 🌿</footer>
+<script>
+const verseBank = [
+{key:"ease",arabic:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",translation:"নিশ্চয়ই কষ্টের সাথেই স্বস্তি রয়েছে।",ref:"সূরা আল-ইনশিরাহ, ৯৪:৫–৬",reflection:"কষ্ট চিরস্থায়ী নয়। ধীরে এগোও, প্রয়োজন হলে বিশ্বস্ত কারও সাহায্য নাও।"},
+{key:"mercy",arabic:"لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ",translation:"আল্লাহর রহমত থেকে নিরাশ হয়ো না।",ref:"সূরা আয-যুমার, ৩৯:৫৩-এর অংশ",reflection:"ভুল বা কষ্টের কারণে আল্লাহর রহমত থেকে আশা হারিয়ো না; ফিরে আসার দরজা খোলা।"},
+{key:"remember",arabic:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",translation:"জেনে রাখো, আল্লাহর স্মরণেই অন্তর প্রশান্ত হয়।",ref:"সূরা আর-রা'দ, ১৩:২৮-এর অংশ",reflection:"একটু থামো, ধীরে শ্বাস নাও, যিকির করো এবং দরকার হলে কারও সঙ্গে কথা বলো।"},
+{key:"capacity",arabic:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",translation:"আল্লাহ কোনো প্রাণকে তার সাধ্যের বাইরে দায়িত্ব দেন না।",ref:"সূরা আল-বাকারা, ২:২৮৬-এর অংশ",reflection:"সব কাজ একসঙ্গে করতে হবে না। পরের ছোট পদক্ষেপটি বেছে নাও এবং বিশ্রাম নাও।"},
+{key:"guidance",arabic:"اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",translation:"আমাদের সরল পথ দেখান।",ref:"সূরা আল-ফাতিহা, ১:৬",reflection:"আল্লাহর কাছে হেদায়াত চাও; প্রয়োজনীয় তথ্য জেনে বিশ্বস্ত ও জ্ঞানী মানুষের পরামর্শ নাও।"},
+{key:"dua",arabic:"فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ",translation:"নিশ্চয়ই আমি নিকটেই আছি; আহ্বানকারী যখন আমাকে ডাকে, আমি তার ডাকে সাড়া দিই।",ref:"সূরা আল-বাকারা, ২:১৮৬-এর অংশ",reflection:"নিজের ভাষায় আন্তরিকভাবে আল্লাহর কাছে বলো—তোমার আশা, ভয়, কষ্ট ও প্রয়োজন।"},
+{key:"knowledge",arabic:"رَّبِّ زِدْنِي عِلْمًا",translation:"হে আমার রব, আমার জ্ঞান বৃদ্ধি করুন।",ref:"সূরা ত্ব-হা, ২০:১১৪-এর অংশ",reflection:"এই দোয়াটি পড়ে ছোট একটি কাজ দিয়ে শুরু করো; একবারে সব শেষ করার চাপ নিও না।"},
+{key:"trust",arabic:"وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ",translation:"যে আল্লাহর ওপর ভরসা করে, তিনিই তার জন্য যথেষ্ট।",ref:"সূরা আত-তালাক, ৬৫:৩-এর অংশ",reflection:"যা তোমার নিয়ন্ত্রণে আছে তা করো; বাকিটা আল্লাহর ওপর সোপর্দ করো।"},
+{key:"gratitude",arabic:"لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ",translation:"তোমরা কৃতজ্ঞ হলে আমি অবশ্যই তোমাদের আরও বাড়িয়ে দেব।",ref:"সূরা ইবরাহিম, ১৪:৭-এর অংশ",reflection:"আজকের কয়েকটি নিয়ামত মনে করে আল্লাহর শুকরিয়া আদায় করো।"},
+{key:"dignity",arabic:"وَلَقَدْ كَرَّمْنَا بَنِي آدَمَ",translation:"নিশ্চয়ই আমি আদমসন্তানকে মর্যাদা দিয়েছি।",ref:"সূরা আল-ইসরা, ১৭:৭০-এর অংশ",reflection:"কষ্টের সময়ে নিজের মর্যাদা ভুলে যেয়ো না। সাহায্য চাওয়া দুর্বলতা নয়।"},
+{key:"forgiveness",arabic:"إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا",translation:"নিশ্চয়ই আল্লাহ সমস্ত গুনাহ ক্ষমা করেন।",ref:"সূরা আয-যুমার, ৩৯:৫৩-এর অংশ",reflection:"আন্তরিক তওবা করো, ভুল থেকে ফিরে আসার চেষ্টা করো এবং আল্লাহর রহমতের আশা রাখো।"},
+{key:"cooperate",arabic:"وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ",translation:"সৎকর্ম ও তাকওয়ার কাজে একে অপরকে সহযোগিতা করো।",ref:"সূরা আল-মায়িদা, ৫:২-এর অংশ",reflection:"একাকী সব সামলাতে হবে না। বিশ্বস্ত বন্ধু, পরিবার বা প্রয়োজনীয় সহায়তার কাছে যাও。"},
+{key:"ease",arabic:"سَيَجْعَلُ اللَّهُ بَعْدَ عُسْرٍ يُسْرًا",translation:"আল্লাহ কষ্টের পর স্বস্তি এনে দেবেন।",ref:"সূরা আত-তালাক, ৬৫:৭-এর অংশ",reflection:"আজ সবকিছু সহজ না হলেও সামনে স্বস্তির পথ খুলে যেতে পারে। ধীরে ধীরে এগোও।"},
+{key:"ease",arabic:"وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ",translation:"তোমরা যেখানেই থাকো, তিনি তোমাদের সঙ্গে আছেন।",ref:"সূরা আল-হাদীদ, ৫৭:৪-এর অংশ",reflection:"কষ্টের সময় নিজেকে একেবারে একা ভেবো না; আল্লাহর জ্ঞান ও নজর তোমাকে ঘিরে আছে।"},
+{key:"mercy",arabic:"وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ",translation:"আমার রহমত সবকিছুকে পরিব্যাপ্ত করে আছে।",ref:"সূরা আল-আ'রাফ, ৭:১৫৬-এর অংশ",reflection:"আল্লাহর রহমত অনেক বিস্তৃত—আশা ধরে রাখো এবং তাঁর দিকে ফিরে এসো।"},
+{key:"mercy",arabic:"لَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ",translation:"আল্লাহর পক্ষ থেকে স্বস্তি/রহমত লাভের আশা ছেড়ো না।",ref:"সূরা ইউসুফ, ১২:৮৭-এর অংশ",reflection:"অন্ধকার সময়েও আশা হারিয়ো না; প্রয়োজন হলে বিশ্বস্ত কারও সঙ্গে কথা বলো।"},
+{key:"remember",arabic:"فَاذْكُرُونِي أَذْكُرْكُمْ",translation:"তোমরা আমাকে স্মরণ করো, আমিও তোমাদের স্মরণ করব।",ref:"সূরা আল-বাকারা, ২:১৫২-এর অংশ",reflection:"একটু থেমে আল্লাহকে স্মরণ করো; ছোট্ট যিকিরও মনকে স্থির করতে সাহায্য করতে পারে।"},
+{key:"remember",arabic:"وَأَقِمِ الصَّلَاةَ لِذِكْرِي",translation:"আমার স্মরণের জন্য সালাত কায়েম করো।",ref:"সূরা ত্ব-হা, ২০:১৪-এর অংশ",reflection:"সম্ভব হলে পরের সালাতটি মনোযোগ দিয়ে আদায় করো এবং আল্লাহর কাছে প্রশান্তি চাও।"},
+{key:"capacity",arabic:"إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",translation:"নিশ্চয়ই আল্লাহ ধৈর্যশীলদের সঙ্গে আছেন।",ref:"সূরা আল-বাকারা, ২:১৫৩-এর অংশ",reflection:"ধৈর্য মানে একা সব সহ্য করা নয়—প্রয়োজনে সাহায্য চাও, আর এক ধাপ করে এগোও।"},
+{key:"capacity",arabic:"وَلَا تَهِنُوا وَلَا تَحْزَنُوا",translation:"তোমরা দুর্বল হয়ো না এবং দুঃখিত হয়ো না।",ref:"সূরা আলে ইমরান, ৩:১৩৯-এর অংশ",reflection:"ক্লান্ত বা দুঃখিত হওয়া স্বাভাবিক। একটু বিশ্রাম নিয়ে আবার ছোট পদক্ষেপে শুরু করো।"},
+{key:"guidance",arabic:"رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي",translation:"হে আমার রব, আমার বক্ষ প্রশস্ত করে দিন এবং আমার কাজ সহজ করে দিন।",ref:"সূরা ত্ব-হা, ২০:২৫–২৬",reflection:"সিদ্ধান্তের আগে এই দোয়া পড়ো, তথ্য যাচাই করো এবং বিশ্বস্ত জ্ঞানী কারও পরামর্শ নাও।"},
+{key:"guidance",arabic:"رَبَّنَا آتِنَا مِن لَّدُنكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا",translation:"হে আমাদের রব, আপনার পক্ষ থেকে আমাদের রহমত দিন এবং আমাদের কাজ সঠিকভাবে পরিচালনার ব্যবস্থা করুন।",ref:"সূরা আল-কাহফ, ১৮:১০-এর অংশ",reflection:"সঠিক পথ চেয়ে দোয়া করো, তারপর শান্তভাবে বিকল্পগুলো বিবেচনা করো।"},
+{key:"dua",arabic:"ادْعُونِي أَسْتَجِبْ لَكُمْ",translation:"তোমরা আমাকে ডাকো, আমি তোমাদের ডাকে সাড়া দেব।",ref:"সূরা গাফির, ৪০:৬০-এর অংশ",reflection:"নিজের ভাষায় মন খুলে আল্লাহর কাছে চাও; দোয়ার পাশাপাশি প্রয়োজনীয় চেষ্টা চালিয়ে যাও।"},
+{key:"dua",arabic:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً",translation:"হে আমাদের রব, আমাদের দুনিয়ায় কল্যাণ দিন এবং আখিরাতেও কল্যাণ দিন।",ref:"সূরা আল-বাকারা, ২:২০১-এর অংশ",reflection:"দুনিয়া ও আখিরাত—দুই জীবনের কল্যাণই আল্লাহর কাছে চাও।"},
+{key:"knowledge",arabic:"يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ",translation:"তোমাদের মধ্যে যারা ঈমান এনেছে এবং যাদের জ্ঞান দেওয়া হয়েছে, আল্লাহ তাদের মর্যাদা উন্নীত করবেন।",ref:"সূরা আল-মুজাদালাহ, ৫৮:১১-এর অংশ",reflection:"অল্প অল্প করে নিয়মিত শেখো; বোঝার চেষ্টা করাটাও অগ্রগতির অংশ।"},
+{key:"knowledge",arabic:"قُلْ هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ",translation:"বলুন, যারা জানে আর যারা জানে না, তারা কি সমান?",ref:"সূরা আয-যুমার, ৩৯:৯-এর অংশ",reflection:"মন না বসলেও ১০ মিনিট দিয়ে শুরু করো—ছোট ধারাবাহিকতা বড় কাজে লাগে।"},
+{key:"trust",arabic:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",translation:"আমাদের জন্য আল্লাহই যথেষ্ট, আর তিনি কতই না উত্তম কর্মবিধায়ক।",ref:"সূরা আলে ইমরান, ৩:১৭৩-এর অংশ",reflection:"নিজের দায়িত্বের কাজটুকু করো, তারপর ফল আল্লাহর ওপর সোপর্দ করো।"},
+{key:"trust",arabic:"قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا",translation:"বলুন, আল্লাহ আমাদের জন্য যা নির্ধারণ করেছেন, তা ছাড়া কিছুই আমাদের ওপর আসবে না।",ref:"সূরা আত-তাওবা, ৯:৫১-এর অংশ",reflection:"অনিশ্চয়তা থাকলেও তোমার সাধ্যের কাজগুলো করো এবং আল্লাহর ওপর ভরসা রাখো।"},
+{key:"gratitude",arabic:"وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ",translation:"আমার প্রতি কৃতজ্ঞ হও এবং অকৃতজ্ঞ হয়ো না।",ref:"সূরা আল-বাকারা, ২:১৫২-এর অংশ",reflection:"আজ ছোট হলেও একটি নিয়ামত খুঁজে বের করো এবং আল্লাহর শুকরিয়া আদায় করো।"},
+{key:"gratitude",arabic:"وَإِن تَعُدُّوا نِعْمَتَ اللَّهِ لَا تُحْصُوهَا",translation:"তোমরা আল্লাহর নিয়ামত গণনা করতে গেলেও তা গুনে শেষ করতে পারবে না।",ref:"সূরা ইবরাহিম, ১৪:৩৪-এর অংশ",reflection:"সবকিছু নিখুঁত না হলেও জীবনে থাকা নিয়ামতগুলো মনে করার চেষ্টা করো।"},
+{key:"dignity",arabic:"لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ",translation:"নিশ্চয়ই আমি মানুষকে সুন্দরতম গঠনে সৃষ্টি করেছি।",ref:"সূরা আত-তীন, ৯৫:৪",reflection:"একটি কঠিন সময় বা ভুল তোমার পুরো মূল্য নির্ধারণ করে না।"},
+{key:"dignity",arabic:"إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ",translation:"আল্লাহর কাছে তোমাদের মধ্যে সবচেয়ে মর্যাদাবান সে, যে সবচেয়ে বেশি তাকওয়াবান।",ref:"সূরা আল-হুজুরাত, ৪৯:১৩-এর অংশ",reflection:"নিজেকে অন্যের সঙ্গে তুলনা না করে ঈমান, চরিত্র ও ভালো কাজে উন্নতির চেষ্টা করো।"},
+{key:"forgiveness",arabic:"وَمَن يَغْفِرُ الذُّنُوبَ إِلَّا اللَّهُ",translation:"আল্লাহ ছাড়া আর কে গুনাহ ক্ষমা করতে পারে?",ref:"সূরা আলে ইমরান, ৩:১৩৫-এর অংশ",reflection:"ভুল বুঝতে পারলে তওবা করো, অধিকার নষ্ট করে থাকলে তা ফিরিয়ে দেওয়ার চেষ্টা করো।"},
+{key:"forgiveness",arabic:"إِلَّا مَن تَابَ وَآمَنَ وَعَمِلَ عَمَلًا صَالِحًا",translation:"তবে যারা তওবা করে, ঈমান আনে এবং সৎকাজ করে…",ref:"সূরা আল-ফুরকান, ২৫:৭০-এর অংশ",reflection:"অতীতের ভুলের পরও আন্তরিক তওবা ও ভালো কাজের মাধ্যমে ফিরে আসার পথ আছে।"},
+{key:"cooperate",arabic:"وَالْمُؤْمِنُونَ وَالْمُؤْمِنَاتُ بَعْضُهُمْ أَوْلِيَاءُ بَعْضٍ",translation:"মুমিন পুরুষ ও মুমিন নারী একে অপরের সহায়ক/অভিভাবক।",ref:"সূরা আত-তাওবা, ৯:৭১-এর অংশ",reflection:"ভালো ও বিশ্বস্ত মানুষের সঙ্গে যোগাযোগ রাখো; সাহায্য চাওয়া স্বাভাবিক।"},
+{key:"cooperate",arabic:"وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ",translation:"ধৈর্য ও সালাতের মাধ্যমে সাহায্য প্রার্থনা করো।",ref:"সূরা আল-বাকারা, ২:৪৫-এর অংশ",reflection:"দোয়া ও সালাতের পাশাপাশি বাস্তব সাহায্যের জন্য বিশ্বস্ত মানুষকে জানাও।"}
+];
+const emotions=[
+["😊","খুশি","Happy","#ffe7a8","gratitude"],["😢","দুঃখিত","Sad","#cfe5ff","capacity"],["🌧️","মন খুব খারাপ","Feeling low","#d9d5ff","mercy"],["🧭","পথ হারিয়ে ফেলেছি","Feeling lost","#d4eadb","guidance"],["🤲","উদ্বিগ্ন","Anxious","#ffd9c9","remember"],["🫂","একা লাগছে","Lonely","#f7d5e8","dua"],["😠","রাগ হচ্ছে","Angry","#ffc9c9","capacity"],["🌱","আশা চাই","Need hope","#d9f0b7","mercy"],["🕊️","শান্তি চাই","Need peace","#c9eee9","remember"],["💪","ক্লান্ত","Tired","#ffe5c2","capacity"],["🙏","ক্ষমা চাই","Seeking forgiveness","#e2d7ff","forgiveness"],["📚","পড়ায় মন বসছে না","Can't focus","#d7e8ff","knowledge"],["😨","ভয় লাগছে","Afraid","#f9d8b8","trust"],["💔","হৃদয় ভেঙেছে","Heartbroken","#ffd1d8","ease"],["🌙","ঘুমের আগে","Before sleep","#d8dcff","remember"],["✨","কৃতজ্ঞ","Grateful","#fff0a6","gratitude"],["🧎","দোয়া করতে চাই","Want to pray","#d2f0d8","dua"],["🪨","চাপ অনুভব করছি","Overwhelmed","#f1dfc9","ease"],["🤍","নিজেকে মূল্যহীন লাগছে","Feeling unworthy","#e7e7e7","dignity"],["🛤️","সিদ্ধান্ত নিতে পারছি না","Need guidance","#d6eadf","guidance"],["🫧","অস্থির লাগছে","Restless","#d2e9f7","remember"],["🌄","নতুন শুরু চাই","Fresh start","#dff2c7","mercy"],["🧠","অতিরিক্ত ভাবছি","Overthinking","#e2ddff","trust"],["🤝","সাহায্য দরকার","Need support","#cce8ef","cooperate"]
+];
+const $=id=>document.getElementById(id);
+let currentEmotion=null, currentVerse=null; const lastVerseIndex={};
+const read=(key,def)=>{try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}};
+const write=(key,value)=>localStorage.setItem(key,JSON.stringify(value));
+function renderEmotions(filter=""){
+ const grid=$("emotionGrid");grid.innerHTML="";
+ const q=filter.trim().toLowerCase();
+ const matched=emotions.filter(e=>(e[1]+" "+e[2]).toLowerCase().includes(q));
+ matched.forEach(e=>{const b=document.createElement("button");b.className="emotion";b.style.background=e[3];b.innerHTML=`<span class="emoji">${e[0]}</span><span class="bn">${e[1]}</span><small>${e[2]}</small>`;b.addEventListener("click",()=>showEmotion(e));grid.appendChild(b)});
+ if(!matched.length)grid.innerHTML='<div class="empty">এই নামে অনুভূতি পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজে দেখো।</div>';
+}
+function chooseVerse(e, avoidRepeat=true){
+ const choices=verseBank.filter(v=>v.key===e[4]);
+ if(!choices.length)return null;
+ let index;
+ if(choices.length===1) index=0;
+ else {
+   const last=lastVerseIndex[e[4]];
+   const options=choices.map((_,i)=>i).filter(i=>!avoidRepeat || i!==last);
+   index=options[Math.floor(Math.random()*options.length)];
+ }
+ lastVerseIndex[e[4]]=index;
+ return choices[index];
+}
+function paintVerse(v){
+ if(!v)return; currentVerse=v;
+ $("verseHeading").textContent="তোমার জন্য একটি আয়াত";
+ $("arabicText").textContent=v.arabic;$("translationText").textContent="“"+v.translation+"”";
+ $("referenceText").textContent=v.ref;$("reflectionText").textContent="💚 "+v.reflection;
+}
+function showEmotion(e){
+ currentEmotion=e;paintVerse(chooseVerse(e));
+ $("emotionLabel").textContent=`তোমার অনুভূতি · ${e[0]} ${e[1]}`;
+ $("noteInput").value=read("sakoonNotes",{})[e[1]]||"";$("favoriteBtn").textContent=read("sakoonFavs",[]).some(x=>x.label===e[1])?"★ পছন্দে আছে":"☆ পছন্দে রাখো";
+ $("verseCard").classList.add("show");$("favoritesSection").classList.remove("show");$("verseCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+$("nextVerseBtn").addEventListener("click",()=>{if(currentEmotion)paintVerse(chooseVerse(currentEmotion));});
+function verseShareText(){if(!currentEmotion)return"";const v=currentVerse||verseBank.find(v=>v.key===currentEmotion[4]);return `${currentEmotion[0]} ${currentEmotion[1]}\\n${v.arabic}\\n${v.translation}\\n${v.ref}\\n\\nSakoon — কুরআনের সান্নিধ্যে`;}
+function updateFavCount(){$("favCount").textContent=read("sakoonFavs",[]).length?`(${read("sakoonFavs",[]).length})`:"";}
+$("search").addEventListener("input",e=>renderEmotions(e.target.value));
+$("favoriteBtn").addEventListener("click",()=>{if(!currentEmotion)return;let f=read("sakoonFavs",[]);const index=f.findIndex(x=>x.label===currentEmotion[1]);if(index>=0)f.splice(index,1);else f.push({label:currentEmotion[1],emoji:currentEmotion[0],key:currentEmotion[4]});write("sakoonFavs",f);$("favoriteBtn").textContent=index>=0?"☆ পছন্দে রাখো":"★ পছন্দে আছে";updateFavCount();});
+$("saveNoteBtn").addEventListener("click",()=>{if(!currentEmotion)return;const n=read("sakoonNotes",{});n[currentEmotion[1]]=$("noteInput").value;write("sakoonNotes",n);alert("নোট এই ডিভাইসে সংরক্ষণ হয়েছে 💚");});
+$("copyBtn").addEventListener("click",async()=>{const t=verseShareText();try{await navigator.clipboard.writeText(t);alert("কপি হয়েছে!")}catch{prompt("কপি করার জন্য টেক্সট:",t)}});
+$("shareBtn").addEventListener("click",async()=>{const t=verseShareText();if(navigator.share){try{await navigator.share({title:"Sakoon",text:t})}catch(e){}}else{try{await navigator.clipboard.writeText(t);alert("শেয়ার টেক্সট কপি হয়েছে!")}catch{prompt("এখান থেকে কপি করো:",t)}}});
+function showHome(){$("homeSection").classList.add("show");$("favoritesSection").classList.remove("show");$("homeBtn").classList.add("active");$("favoritesBtn").classList.remove("active");}
+$("homeBtn").addEventListener("click",()=>{showHome();$("homeSection").scrollIntoView({behavior:"smooth"});});
+$("favoritesBtn").addEventListener("click",()=>{showHome();$("homeSection").classList.remove("show");$("verseCard").classList.remove("show");$("favoritesSection").classList.add("show");$("homeBtn").classList.remove("active");$("favoritesBtn").classList.add("active");renderFavorites();$("favoritesSection").scrollIntoView({behavior:"smooth"});});
+function renderFavorites(){const list=$("favoritesList"),f=read("sakoonFavs",[]);list.innerHTML="";if(!f.length){list.innerHTML='<div class="empty">এখনো কোনো আয়াত পছন্দে রাখোনি। 💚<br>অনুভূতি বেছে নিয়ে ☆ বাটনে চাপ দাও।</div>';return;}f.forEach(item=>{const row=document.createElement("div");row.className="fav-item";const open=document.createElement("button");open.textContent=`${item.emoji} ${item.label}`;open.onclick=()=>{const e=emotions.find(e=>e[1]===item.label);if(e){showHome();showEmotion(e);}};const del=document.createElement("button");del.textContent="✕";del.setAttribute("aria-label","পছন্দ থেকে বাদ দাও");del.onclick=()=>{write("sakoonFavs",read("sakoonFavs",[]).filter(x=>x.label!==item.label));updateFavCount();renderFavorites();};row.append(open,del);list.appendChild(row);});}
+$("themeBtn").addEventListener("click",()=>{document.body.classList.toggle("dark");write("sakoonDark",document.body.classList.contains("dark"));});
+if(read("sakoonDark",false))document.body.classList.add("dark");
+renderEmotions();updateFavCount();
+</script>
+</body>
+</html>
